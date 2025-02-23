@@ -1,14 +1,14 @@
 :root {
   --text-color: #e0e0e0;
-  --primary-color: #90caf9; /* A lighter blue */
-  --secondary-bg-color: rgba(30, 30, 30, 0.7); /* Darker and more opaque */
-  --hover-bg-color: rgba(50, 50, 50, 0.7); /* Darker hover */
-  --input-bg-color: rgba(50, 50, 50, 0.7); /* Darker input */
-  --input-border-color: #666; /* Slightly lighter border */
-  --accent-color: #a7ffeb; /* A vibrant teal */
-    --gradient-start: rgba(106, 27, 154, 0.8); /* Purple */
-  --gradient-mid1:  rgba(255, 152, 0, 0.4);  /* Orange */
-  --gradient-mid2: rgba(76, 175, 80, 0.2);   /* Green */
+  --primary-color: #90caf9;
+  --secondary-bg-color: rgba(30, 30, 30, 0.7);
+  --hover-bg-color: rgba(50, 50, 50, 0.7);
+  --input-bg-color: rgba(50, 50, 50, 0.7);
+  --input-border-color: #666;
+  --accent-color: #a7ffeb;
+  --gradient-start: rgba(106, 27, 154, 0.8);
+  --gradient-mid1: rgba(255, 152, 0, 0.4);
+  --gradient-mid2: rgba(76, 175, 80, 0.2);
   --gradient-end: #0a0a0a;
 }
 
@@ -23,26 +23,25 @@ body {
   min-height: 100vh;
 }
 
-/* Gradient and overlay for the body */
 body::before {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, var(--gradient-start), var(--gradient-mid1), var(--gradient-mid2),  var(--gradient-end));
+  height: 5cm; /* Set the height to 5cm */
+  background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-mid1), var(--gradient-mid2), var(--gradient-end));
   z-index: -2;
 }
 
 body::after {
   content: '';
   position: fixed;
-  top: 0;
+  top: 5cm; /* Start the fade from 5cm */
   left: 0;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.9) 80%);
+  height: calc(100% - 5cm); /* Make the fade cover the rest of the page */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.9)); /* Fade to dark */
   z-index: -1;
 }
 
@@ -50,27 +49,71 @@ body::after {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
+  padding: 0 30px 30px 30px;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
 }
 
 .top-bar {
   display: flex;
-  justify-content: center; /* Center the title */
   align-items: center;
   width: 100%;
-  max-width: 900px;
-  margin-bottom: 50px; /* Increased margin */
+  max-width: 100%;
+  margin-bottom: 50px;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 15px 30px;
+  position: relative;
+    padding-left: 120px;
+
+}
+
+.site-name {
+  color: #fff;
+  font-size: 1.8rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-right: 20px;
+}
+
+.smaller-e {
+  font-size: 1.4rem;
+  vertical-align: baseline;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  color: var(--accent-color);
+}
+
+.search-icon {
+    margin-left: 5px;
+  font-size: 1rem;
 }
 
 .app-title {
   color: #fff;
   margin-bottom: 0;
-  font-size: 2.8rem; /* Even larger title */
+  font-size: 2.8rem;
   font-weight: 700;
-  letter-spacing: 1px; /* More pronounced letter spacing */
-  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+  letter-spacing: 1px;
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .content-area {
@@ -78,30 +121,39 @@ body::after {
   max-width: 900px;
 }
 
+.search-heading {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: var(--text-color);
+    text-align: center;
+}
+
 .search-form {
   display: flex;
-  margin-bottom: 40px; /* Increased margin */
+  margin-bottom: 40px;
   width: 100%;
-  border-radius: 100px; /* Pill-shaped form */
+  border-radius: 100px;
   overflow: hidden;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Stronger shadow */
-  background-color: rgba(0, 0, 0, 0.5); /* More opaque background */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
 }
 
 .search-input {
   flex-grow: 1;
-  padding: 20px 30px; /* More padding */
+  padding: 20px 30px;
   border: none;
-  font-size: 20px; /* Larger font size */
+  font-size: 20px;
   color: var(--text-color);
   background: none;
   transition: background-color 0.3s ease, color 0.3s ease;
   outline: none;
-  font-weight: 500; /* Semi-bold text */
+  font-weight: 500;
 }
 
 .search-input::placeholder {
-  color: #ccc; /* Lighter placeholder text */
+  color: #ccc;
   font-weight: 400;
 }
 
@@ -110,23 +162,23 @@ body::after {
 }
 
 .search-button {
-  padding: 20px 40px; /* More padding */
+  padding: 20px 40px;
   background-color: var(--primary-color);
   color: white;
   border: none;
   cursor: pointer;
-  font-size: 20px; /* Larger font size */
-  font-weight: 600; /* Bolder text */
+  font-size: 20px;
+  font-weight: 600;
   transition: background-color 0.3s ease, transform 0.2s ease;
   outline: none;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Stronger shadow */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   letter-spacing: 0.5px;
 }
 
 .search-button:hover {
   background-color: #75aaff;
-  transform: translateY(-3px); /* More pronounced lift */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.4); /* Even stronger shadow */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
 }
 
 .search-button:focus {
@@ -134,10 +186,10 @@ body::after {
 }
 
 .loading-text {
-  margin-bottom: 30px; /* Increased margin */
-  font-size: 18px; /* Slightly larger */
+  margin-bottom: 30px;
+  font-size: 18px;
   color: var(--text-color);
-  opacity: 0.9; /* More opaque */
+  opacity: 0.9;
 }
 
 .papers-list {
@@ -148,45 +200,45 @@ body::after {
 
 .paper-item {
   background-color: var(--secondary-bg-color);
-  border-radius: 20px; /* Even more rounded corners */
-  padding: 30px; /* More padding */
-  margin-bottom: 25px; /* Increased margin */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out, background-color 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   border: none;
 }
 
 .paper-item:hover {
-  transform: scale(1.05); /* More pronounced scale */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Even stronger shadow */
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
   background-color: var(--hover-bg-color);
 }
 
 .paper-title {
   margin-top: 0;
-  margin-bottom: 16px; /* Increased margin */
-  font-size: 1.8rem; /* Slightly larger */
+  margin-bottom: 16px;
+  font-size: 1.8rem;
   color: var(--text-color);
   transition: color 0.3s ease;
-  font-weight: 600; /* Bolder */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Text shadow */
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .paper-authors {
-  color: #bbb; /* Lighter color */
+  color: #bbb;
   margin-bottom: 0;
   transition: color 0.3s ease;
-  font-size: 1.1rem; /* Slightly larger */
+  font-size: 1.1rem;
   font-weight: 400;
 }
 
 .paper-details {
   background-color: var(--secondary-bg-color);
-  border-radius: 15px; /* More rounded corners */
-  padding: 40px; /* More padding */
-  margin-top: 40px; /* Increased margin */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+  border-radius: 15px;
+  padding: 40px;
+  margin-top: 40px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   width: 100%;
   box-sizing: border-box;
   transition: background-color 0.3s ease,  box-shadow 0.3s ease;
@@ -194,46 +246,46 @@ body::after {
 }
 
 .paper-details .paper-title {
-  font-size: 2.6rem; /* Even larger */
-  margin-bottom: 25px; /* Increased margin */
-  font-weight: 700; /* Bolder */
+  font-size: 2.6rem;
+  margin-bottom: 25px;
+  font-weight: 700;
 }
 
 .paper-details .paper-authors {
-  color: #ddd; /* Lighter color */
-  margin-bottom: 25px; /* Increased margin */
-  font-size: 1.2rem; /* Slightly larger */
+  color: #ddd;
+  margin-bottom: 25px;
+  font-size: 1.2rem;
 }
 
 .paper-details .paper-summary {
   color: var(--text-color);
-  line-height: 1.8; /* Increased line height */
-  margin-bottom: 40px; /* Increased margin */
+  line-height: 1.8;
+  margin-bottom: 40px;
   white-space: pre-line;
-  font-size: 1.1rem; /* Slightly larger */
-  opacity: 1; /* Fully opaque */
+  font-size: 1.1rem;
+  opacity: 1;
 }
 
 .paper-link {
   display: inline-block;
-  padding: 16px 32px; /* More padding */
+  padding: 16px 32px;
   background-color: var(--accent-color);
-  color: #222; /* Darker text */
+  color: #222;
   text-decoration: none;
-  border-radius: 12px; /* More rounded corners */
-  font-weight: 600; /* Bolder */
+  border-radius: 12px;
+  font-weight: 600;
   transition: background-color 0.3s ease, color 0.3s ease;
   outline: none;
   border: 2px solid transparent;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Stronger shadow */
-  font-size: 1.2rem; /* Slightly larger */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  font-size: 1.2rem;
 }
 
 .paper-link:hover {
   background-color: var(--hover-bg-color);
   color: var(--accent-color);
   border-color: var(--accent-color);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.3); /* Even stronger shadow */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 
 .paper-link:focus {
@@ -245,22 +297,22 @@ body::after {
 
 .back-button {
   padding: 14px 28px;
-  background-color: #444; /* Darker */
+  background-color: #444;
   color: var(--text-color);
   border: none;
-  border-radius: 12px; /* More rounded corners */
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 1.1rem; /* Slightly larger */
-  margin-bottom: 35px; /* Increased margin */
+  font-size: 1.1rem;
+  margin-bottom: 35px;
   transition: background-color 0.3s ease;
   outline: none;
   border: 2px solid transparent;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Stronger shadow */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .back-button:hover {
-  background-color: #666; /* Even darker */
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Even stronger shadow */
+  background-color: #666;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 .back-button:focus {

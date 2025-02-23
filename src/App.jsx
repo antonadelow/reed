@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { FaSearch } from 'react-icons/fa';
+
 
 function App() {
   const [papers, setPapers] = useState([]);
@@ -59,12 +61,29 @@ function App() {
     setSelectedPaper(null);
   };
 
+    const handleSearchLinkClick = (event) => {
+    event.preventDefault(); // Prevent default link behavior
+    // Scroll to the search form
+    const searchForm = document.querySelector('.search-form');
+    if (searchForm) {
+      searchForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="app-container">
       <div className="top-bar">
-        <h1 className="app-title">Arxiv Paper Search</h1>
+        <span className="site-name">R<span className="smaller-e">eed</span></span>
+        <div className="nav-links">
+          <a href="#" onClick={handleSearchLinkClick} className="nav-link">
+            Search <FaSearch className="search-icon" />
+          </a>
+          <a href="#" className="nav-link">Feed</a>
+          <a href="#" className="nav-link">Explore</a>
+        </div>
       </div>
       <div className="content-area">
+        <h2 className="search-heading">Search for a paper</h2>
         <form className="search-form" onSubmit={handleSearchSubmit}>
           <input
             className="search-input"
@@ -99,6 +118,8 @@ function App() {
           </div>
         )}
       </div>
+      {/* Dark overlay */}
+      <div className="dark-overlay"></div>
     </div>
   );
 }
